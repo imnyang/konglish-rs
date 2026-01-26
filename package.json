@@ -1,7 +1,7 @@
 {
   "name": "konglish",
   "version": "0.0.0",
-  "description": "영어/외래어를 한국어 발음으로 바꿔주는 라이브러리",
+  "description": "영어를 한국어 발음으로 바꿔주는 라이브러리",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
