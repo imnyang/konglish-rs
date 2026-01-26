@@ -1,26 +1,35 @@
-// latin-to-ko.js (ESM)
-// npm i cmu-pronouncing-dictionary  (선택)
-// - 설치되어 있으면 CMUdict로 ARPAbet을 얻고 → 한글 후보 생성
-// - 없으면 간단 룰(tokenize+vowel split)로 fallback
 import { dictionary as CMU } from "cmu-pronouncing-dictionary";
 import { customDictionary } from "./dictionary";
 
 type Cand = { text: string; score: number };
-type CandidatesOptions = { limit?: number };
+type Token = { type: "word" | "other"; text: string };
 
-export function latinToKo(input: string): string {
-  // 영어 단어와 비영어 부분을 분리하여 영어만 변환, 특수문자는 보존
+type BaseTransliterateOptions = {
+  dictionary?: Record<string, string[]>;
+  beamWidth?: number;
+  enableFallbackPhones?: boolean;
+};
+
+export type LatinToKoOptions = BaseTransliterateOptions;
+export type LatinToKoCandidatesOptions = BaseTransliterateOptions & {
+  limit?: number;
+};
+
+type InternalOptions = {
+  limit: number;
+  beamWidth: number;
+  enableFallbackPhones: boolean;
+  dictionaryOverride?: Record<string, string[]>;
+};
+
+const DEFAULT_LIMIT = 5;
+const DEFAULT_BEAM_WIDTH = 8;
+
+export function latinToKo(input: string, options?: LatinToKoOptions): string {
   const tokens = tokenizePreservingSpecialChars(input);
-  const result = tokens
-    .map((token) => {
-      if (token.type === "word") {
-        const [best] = latinToKoCandidatesInternal(token.text, { limit: 1 });
-        return best ?? token.text;
-      }
-      return token.text; // 특수문자/공백 등은 그대로
-    })
-    .join("");
-  return result;
+  const resolved = resolveOptions(options, 1);
+  const [best] = transliterateTokens(tokens, resolved);
+  return best ?? input;
 }
 
 function tokenizePreservingSpecialChars(
@@ -41,36 +50,60 @@ function tokenizePreservingSpecialChars(
 
 export function latinToKoCandidates(
   input: string,
-  { limit = 5 }: CandidatesOptions = {},
+  options: LatinToKoCandidatesOptions = {},
 ): string[] {
-  // 특수문자 보존 버전 - 각 영어 단어를 개별 변환
+  const limit = options.limit ?? DEFAULT_LIMIT;
   const tokens = tokenizePreservingSpecialChars(input);
-  const wordTokens = tokens.filter((t) => t.type === "word");
-
-  if (wordTokens.length === 0) return [];
-
-  // 모든 단어를 하나의 문자열로 합쳐서 후보 생성
-  const combinedWords = wordTokens.map((t) => t.text).join(" ");
-  const candidates = latinToKoCandidatesInternal(combinedWords, { limit });
-
-  // 특수문자를 포함한 결과 생성
-  return candidates.map((cand) => {
-    const candWords = cand.split(" ");
-    let candIdx = 0;
-    return tokens
-      .map((token) => {
-        if (token.type === "word" && candIdx < candWords.length) {
-          return candWords[candIdx++];
-        }
-        return token.text;
-      })
-      .join("");
-  });
+  const resolved = resolveOptions(options, limit);
+  return transliterateTokens(tokens, resolved);
 }
 
-function latinToKoCandidatesInternal(
+function transliterateTokens(
+  tokens: Token[],
+  options: InternalOptions,
+): string[] {
+  const wordTokens = tokens.filter((token) => token.type === "word");
+  if (wordTokens.length === 0) return [];
+
+  const combinedWords = wordTokens.map((t) => t.text).join(" ");
+  const candidates = buildWordCandidates(combinedWords, options);
+  if (candidates.length === 0) return [];
+
+  return candidates.map((cand) => applyCandidateToTokens(tokens, cand));
+}
+
+function resolveOptions(
+  options: BaseTransliterateOptions | undefined,
+  limit: number,
+): InternalOptions {
+  const desiredBeam = options?.beamWidth ?? DEFAULT_BEAM_WIDTH;
+
+  return {
+    limit,
+    beamWidth: Math.max(desiredBeam, limit, DEFAULT_BEAM_WIDTH),
+    enableFallbackPhones: options?.enableFallbackPhones ?? true,
+    dictionaryOverride: options?.dictionary,
+  };
+}
+
+function applyCandidateToTokens(tokens: Token[], candidate: string): string {
+  const candWords = candidate.split(" ");
+  let candIdx = 0;
+  return tokens
+    .map((token) => {
+      if (token.type === "word") {
+        const next = candWords[candIdx];
+        candIdx += 1;
+        return next ?? token.text;
+      }
+      return token.text;
+    })
+    .join("");
+}
+
+function buildWordCandidates(
   input: string,
-  { limit = 5 }: CandidatesOptions = {},
+  options: InternalOptions,
 ): string[] {
   const text = normalizeInput(input);
   if (!text) return [];
@@ -78,29 +111,33 @@ function latinToKoCandidatesInternal(
   const words = text.split(/\s+/).filter(Boolean);
 
   let beam: Cand[] = [{ text: "", score: 0 }];
+  const { beamWidth, limit } = options;
 
   for (let wi = 0; wi < words.length; wi++) {
     const w = words[wi];
 
     // Stage 1) Override dictionary
-    const override = overrideCandidates(w).map((s, i) => ({
-      text: s,
-      score: i,
-    }));
+    const override = overrideCandidates(w, options.dictionaryOverride).map(
+      (s, i) => ({
+        text: s,
+        score: i,
+      }),
+    );
 
     // Stage 2) CMUdict
     const phones = cmuLookupPhones(w);
     const dictCands = phones
-      ? arpabetToKoCandidates(phones, Math.max(8, limit)).map((s, i) => ({
+      ? arpabetToKoCandidates(phones, beamWidth).map((s, i) => ({
           text: s,
           score: 100 + i,
         }))
       : [];
 
     // Stage 3) Fallback phones (cheap G2P-ish rules)
-    const fb = phones ? null : fallbackPhones(w);
+    const fb =
+      phones || !options.enableFallbackPhones ? null : fallbackPhones(w);
     const fbCands = fb
-      ? arpabetToKoCandidates(fb, Math.max(8, limit)).map((s, i) => ({
+      ? arpabetToKoCandidates(fb, beamWidth).map((s, i) => ({
           text: s,
           score: 200 + i,
         }))
@@ -108,9 +145,9 @@ function latinToKoCandidatesInternal(
 
     const wordBeam = takeTopK(
       dedupeByText([...override, ...dictCands, ...fbCands]),
-      Math.max(8, limit),
+      beamWidth,
     );
-    beam = combineBeams(beam, wordBeam, Math.max(8, limit));
+    beam = combineBeams(beam, wordBeam, beamWidth);
 
     if (wi !== words.length - 1)
       beam = beam.map((x) => ({ text: x.text + " ", score: x.score }));
@@ -131,12 +168,17 @@ function latinToKoCandidatesInternal(
 
 /* -------------------------------- Stage 1: Override -------------------------------- */
 
-function overrideCandidates(word: string): string[] {
+function overrideCandidates(
+  word: string,
+  overrides?: Record<string, string[]>,
+): string[] {
   const key = word.toLowerCase();
-  const hit = (customDictionary as any)[key];
-  if (!hit) return [];
-  if (Array.isArray(hit)) return hit.map(String);
-  return [String(hit)];
+  const userHit = overrides?.[key];
+  if (userHit && userHit.length > 0) return userHit.map(String);
+
+  const builtIn = customDictionary[key as keyof typeof customDictionary];
+  if (!builtIn || builtIn.length === 0) return [];
+  return builtIn.map(String);
 }
 
 /* -------------------------------- Stage 2: CMUdict -------------------------------- */

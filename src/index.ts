@@ -1,5 +1,7 @@
-// konglish - Korean/English transliteration library
-
-export function hello(): string {
-  return 'Hello from konglish!';
-}
+export {
+  latinToKo,
+  latinToKoCandidates,
+  type LatinToKoOptions,
+  type LatinToKoCandidatesOptions,
+} from "./pron/latinTokorea";
+export { customDictionary } from "./pron/dictionary";

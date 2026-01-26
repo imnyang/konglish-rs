@@ -42,9 +42,13 @@
   },
   "homepage": "https://github.com/oyc0401/konglish#readme",
   "license": "MIT",
+  "dependencies": {
+    "cmu-pronouncing-dictionary": "^3.0.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
     "@types/node": "^20.11.5",
+    "ts-node": "^10.9.2",
     "tsup": "^7.2.0",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"
