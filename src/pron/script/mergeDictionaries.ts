@@ -7,8 +7,8 @@
  * - 각 배열 내 값의 순서는 유지 (먼저 나온 것 우선)
  */
 
-// pnpm ts-node src/scripts/pron/mergeDictionaries.ts
-// pnpm ts-node src/scripts/pron/mergeDictionaries.ts --dry-run
+// pnpm ts-node src/pron/script/mergeDictionaries.ts
+// pnpm ts-node src/pron/script/mergeDictionaries.ts --dry-run
 
 import * as fs from "fs";
 import * as path from "path";

@@ -1,7 +1,3 @@
-export {
-  latinToKo,
-  latinToKoCandidates,
-  type LatinToKoOptions,
-  type LatinToKoCandidatesOptions,
-} from "./pron/latinTokorea";
+export { latinToHangul, type LatinToHangulOptions } from "./pron/latinTokorea";
+export { Konglish } from "./konglish";
 export { customDictionary } from "./pron/dictionary";

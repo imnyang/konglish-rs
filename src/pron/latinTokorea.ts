@@ -4,14 +4,13 @@ import { customDictionary } from "./dictionary";
 type Cand = { text: string; score: number };
 type Token = { type: "word" | "other"; text: string };
 
-type BaseTransliterateOptions = {
+export type LatinToHangulOptions = {
   dictionary?: Record<string, string[]>;
   beamWidth?: number;
   enableFallbackPhones?: boolean;
 };
 
-export type LatinToKoOptions = BaseTransliterateOptions;
-export type LatinToKoCandidatesOptions = BaseTransliterateOptions & {
+type LatinToHangulCandidatesOptions = LatinToHangulOptions & {
   limit?: number;
 };
 
@@ -25,7 +24,10 @@ type InternalOptions = {
 const DEFAULT_LIMIT = 5;
 const DEFAULT_BEAM_WIDTH = 8;
 
-export function latinToKo(input: string, options?: LatinToKoOptions): string {
+export function latinToHangul(
+  input: string,
+  options?: LatinToHangulOptions,
+): string {
   const tokens = tokenizePreservingSpecialChars(input);
   const resolved = resolveOptions(options, 1);
   const [best] = transliterateTokens(tokens, resolved);
@@ -48,9 +50,12 @@ function tokenizePreservingSpecialChars(
   return tokens;
 }
 
-export function latinToKoCandidates(
+/**
+ * @internal - 후보 기능은 v2에서 공개 예정
+ */
+function latinToHangulCandidates(
   input: string,
-  options: LatinToKoCandidatesOptions = {},
+  options: LatinToHangulCandidatesOptions = {},
 ): string[] {
   const limit = options.limit ?? DEFAULT_LIMIT;
   const tokens = tokenizePreservingSpecialChars(input);
@@ -66,6 +71,35 @@ function transliterateTokens(
   if (wordTokens.length === 0) return [];
 
   const combinedWords = wordTokens.map((t) => t.text).join(" ");
+
+  // 전체 문구가 사전에 있으면 우선 사용 (예: "thank you" -> "땡큐")
+  const phraseKey = combinedWords.toLowerCase();
+  const phraseHit =
+    options.dictionaryOverride?.[phraseKey] ??
+    customDictionary[phraseKey as keyof typeof customDictionary];
+  if (phraseHit && phraseHit.length > 0) {
+    // 전체 문구가 매칭되면, word 토큰들 사이의 other 토큰(공백 등)도 제거하고 결과 반환
+    const firstWordIdx = tokens.findIndex((t) => t.type === "word");
+    const nonWordPrefix = tokens
+      .slice(0, firstWordIdx)
+      .map((t) => t.text)
+      .join("");
+    let lastWordIdx = -1;
+    for (let i = tokens.length - 1; i >= 0; i--) {
+      if (tokens[i].type === "word") {
+        lastWordIdx = i;
+        break;
+      }
+    }
+    const nonWordSuffix = tokens
+      .slice(lastWordIdx + 1)
+      .map((t) => t.text)
+      .join("");
+    return phraseHit
+      .slice(0, options.limit)
+      .map((hit) => nonWordPrefix + hit + nonWordSuffix);
+  }
+
   const candidates = buildWordCandidates(combinedWords, options);
   if (candidates.length === 0) return [];
 
@@ -73,7 +107,7 @@ function transliterateTokens(
 }
 
 function resolveOptions(
-  options: BaseTransliterateOptions | undefined,
+  options: LatinToHangulOptions | undefined,
   limit: number,
 ): InternalOptions {
   const desiredBeam = options?.beamWidth ?? DEFAULT_BEAM_WIDTH;
@@ -109,6 +143,7 @@ function buildWordCandidates(
   if (!text) return [];
 
   const words = text.split(/\s+/).filter(Boolean);
+
 
   let beam: Cand[] = [{ text: "", score: 0 }];
   const { beamWidth, limit } = options;
