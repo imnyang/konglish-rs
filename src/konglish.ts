@@ -1,7 +1,4 @@
-import {
-  latinToHangul,
-  type LatinToHangulOptions,
-} from "./pron/latinTokorea";
+import { type LatinToHangulOptions, latinToHangul } from "./pron/latinTokorea";
 
 /**
  * Konglish - 라틴 문자 → 한국어 발음 변환기

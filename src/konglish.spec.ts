@@ -10,8 +10,6 @@ describe("Konglish class", () => {
       },
     });
     expect(konglish.latinToHangul("latte meetup")).toBe("라떼 밋업");
-    expect(konglish.latinToHangul("simple lunch menu")).toBe(
-      "심플 런치 메뉴",
-    );
+    expect(konglish.latinToHangul("simple lunch menu")).toBe("심플 런치 메뉴");
   });
 });

@@ -13,9 +13,9 @@ describe("latinToHangul", () => {
   });
 
   it("사전 override 옵션을 적용할 수 있어야 함", () => {
-    expect(
-      latinToHangul("codex", { dictionary: { codex: ["코덱스"] } }),
-    ).toBe("코덱스");
+    expect(latinToHangul("codex", { dictionary: { codex: ["코덱스"] } })).toBe(
+      "코덱스",
+    );
   });
 
   it("README 예제를 그대로 재현해야 함", () => {

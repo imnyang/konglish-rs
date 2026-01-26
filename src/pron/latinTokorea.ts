@@ -144,7 +144,6 @@ function buildWordCandidates(
 
   const words = text.split(/\s+/).filter(Boolean);
 
-
   let beam: Cand[] = [{ text: "", score: 0 }];
   const { beamWidth, limit } = options;
 
