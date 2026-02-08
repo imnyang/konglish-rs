@@ -19,16 +19,19 @@ const normalize = (s: string) => s.trim().toLowerCase();
 function tokenizePreservingSpecialChars(input: string): Token[] {
   const tokens: Token[] = [];
   const regex = /([a-zA-Z]+)|([^a-zA-Z]+)/g;
-  let match: RegExpExecArray | null;
 
-  while ((match = regex.exec(input)) !== null) {
+  while (true) {
+    const match = regex.exec(input);
+    if (!match) break;
     if (match[1]) tokens.push({ type: "word", text: match[1] });
     else if (match[2]) tokens.push({ type: "other", text: match[2] });
   }
   return tokens;
 }
 
-function mergeDict(user?: Record<string, string[]>): Record<string, readonly string[]> {
+function mergeDict(
+  user?: Record<string, string[]>,
+): Record<string, readonly string[]> {
   const out: Record<string, readonly string[]> = { ...customDictionary };
   if (!user) return out;
 
@@ -41,18 +44,27 @@ function mergeDict(user?: Record<string, string[]>): Record<string, readonly str
   return out;
 }
 
-function dictLookup(dict: Record<string, readonly string[]>, keyLike: string): string | null {
+function dictLookup(
+  dict: Record<string, readonly string[]>,
+  keyLike: string,
+): string | null {
   const key = normalize(keyLike);
   const v = dict[key];
   return v && v.length > 0 ? v[0] : null;
 }
 
-function fullInputLookup(dict: Record<string, readonly string[]>, input: string): string | null {
+function fullInputLookup(
+  dict: Record<string, readonly string[]>,
+  input: string,
+): string | null {
   // input 전체를 키로 한번에 찾음.
   return dictLookup(dict, input);
 }
 
-export function latinToHangul(input: string, options?: LatinToHangulOptions): string {
+export function latinToHangul(
+  input: string,
+  options?: LatinToHangulOptions,
+): string {
   const dict = mergeDict(options?.dictionary);
 
   const fullHit = fullInputLookup(dict, input);

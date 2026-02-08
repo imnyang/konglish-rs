@@ -16,13 +16,13 @@ function loadJson<T>(p: string): T {
 
 function getUnkId(v: Vocab): number {
   const stoi = v.stoi ?? {};
-  return stoi["<unk>"] ?? stoi["<UNK>"] ?? stoi["UNK"] ?? stoi["[UNK]"] ?? 0;
+  return stoi["<unk>"] ?? stoi["<UNK>"] ?? stoi.UNK ?? stoi["[UNK]"] ?? 0;
 }
 
 function encodeCharLevel(
   text: string,
   sv: Vocab,
-  opts?: { lowercase?: boolean; addBosEos?: boolean }
+  opts?: { lowercase?: boolean; addBosEos?: boolean },
 ): number[] {
   const stoi = sv.stoi ?? {};
   const unk = getUnkId(sv);
@@ -60,7 +60,10 @@ function logSoftmax(arr: Float32Array): Float32Array {
   return out;
 }
 
-function topK(logp: Float32Array, k: number): Array<{ idx: number; val: number }> {
+function topK(
+  logp: Float32Array,
+  k: number,
+): Array<{ idx: number; val: number }> {
   const best: Array<{ idx: number; val: number }> = [];
   for (let i = 0; i < logp.length; i++) {
     const v = logp[i];
@@ -76,17 +79,17 @@ function topK(logp: Float32Array, k: number): Array<{ idx: number; val: number }
 }
 
 function lengthPenalty(score: number, length: number, alpha: number): number {
-  return score / Math.pow(length, alpha);
+  return score / length ** alpha;
 }
 
 type Beam = { toks: number[]; score: number; h: ort.Tensor };
 
 export type BeamEngineOptions = {
   baseDir: string;
-  beam?: number;           // default 3
-  maxOut?: number;         // default 64
-  alpha?: number;          // default 0.7
-  lowercase?: boolean;     // default false
+  beam?: number; // default 3
+  maxOut?: number; // default 64
+  alpha?: number; // default 0.7
+  lowercase?: boolean; // default false
 };
 
 export class OnnxBeamEngine {
@@ -121,10 +124,11 @@ export class OnnxBeamEngine {
 
   async predictWord(word: string): Promise<string | null> {
     await this.init();
-    if (!this.encSession || !this.decSession || !this.sv || !this.tv) throw new Error("Engine not ready");
-    
+    if (!this.encSession || !this.decSession || !this.sv || !this.tv)
+      throw new Error("Engine not ready");
+
     const tv = this.tv;
-    
+
     const srcText = word.trim();
     if (!srcText) return null;
 
@@ -142,9 +146,9 @@ export class OnnxBeamEngine {
 
     // encoder
     const encOuts = await this.encSession.run({ src_ids: srcTensor });
-    const enc_out = encOuts["enc_out"] as ort.Tensor;
-    const h0 = encOuts["h0"] as ort.Tensor;
-    const enc_mask = encOuts["enc_mask"] as ort.Tensor;
+    const enc_out = encOuts.enc_out as ort.Tensor;
+    const h0 = encOuts.h0 as ort.Tensor;
+    const enc_mask = encOuts.enc_mask as ort.Tensor;
 
     // beam search
     const beam = this.opts.beam ?? 3;
@@ -173,14 +177,18 @@ export class OnnxBeamEngine {
           enc_mask,
         });
 
-        const logits = decOuts["logits"] as ort.Tensor;
-        const next_h = decOuts["next_h"] as ort.Tensor;
+        const logits = decOuts.logits as ort.Tensor;
+        const next_h = decOuts.next_h as ort.Tensor;
 
         const logp = logSoftmax(logits.data as Float32Array);
         const top = topK(logp, beam);
 
         for (const t of top) {
-          cand.push({ toks: [...b.toks, t.idx], score: b.score + t.val, h: next_h });
+          cand.push({
+            toks: [...b.toks, t.idx],
+            score: b.score + t.val,
+            h: next_h,
+          });
         }
       }
 
@@ -200,7 +208,8 @@ export class OnnxBeamEngine {
       }
     }
 
-    if (finished.length === 0) finished = beams.map((b) => ({ toks: b.toks, score: b.score }));
+    if (finished.length === 0)
+      finished = beams.map((b) => ({ toks: b.toks, score: b.score }));
 
     finished.sort((a, b) => {
       const la = lengthPenalty(a.score, a.toks.length, alpha);

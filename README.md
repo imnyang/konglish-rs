@@ -44,9 +44,18 @@ const konglish = new Konglish({
   },
 });
 
-konglish.latinToHangul("latte meetup"); // "라떼 밋업"
-konglish.latinToHangul("simple lunch menu"); // "심플 런치 메뉴"
+const autoKonglish = await Konglish.auto({
+  dictionary: {
+    latte: ["라떼"],
+    meetup: ["밋업"],
+  },
+});
+
+const sync = konglish.latinToHangul("latte meetup"); // "라떼 밋업"
+const asyncOut = await autoKonglish.latinToHangul("latte meetup xylophone");
 ```
+
+`Konglish.auto`는 내장 ONNX 추론기를 초기화한 뒤 `KonglishAuto` 인스턴스를 반환합니다. 이 인스턴스의 `latinToHangul` 메서드는 Promise를 반환하므로 `await`로 호출해야 합니다.
 
 
 ## 라이선스

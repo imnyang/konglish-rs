@@ -19,58 +19,24 @@
   "onnx": {
     "encoder": {
       "inputs": {
-        "src_ids": [
-          "batch",
-          "src_len"
-        ]
+        "src_ids": ["batch", "src_len"]
       },
       "outputs": {
-        "enc_out": [
-          "batch",
-          "src_len",
-          512
-        ],
-        "h0": [
-          1,
-          "batch",
-          256
-        ],
-        "enc_mask": [
-          "batch",
-          "src_len"
-        ]
+        "enc_out": ["batch", "src_len", 512],
+        "h0": [1, "batch", 256],
+        "enc_mask": ["batch", "src_len"]
       }
     },
     "decoder_step": {
       "inputs": {
-        "y_t": [
-          "batch"
-        ],
-        "prev_h": [
-          1,
-          "batch",
-          256
-        ],
-        "enc_out": [
-          "batch",
-          "src_len",
-          512
-        ],
-        "enc_mask": [
-          "batch",
-          "src_len"
-        ]
+        "y_t": ["batch"],
+        "prev_h": [1, "batch", 256],
+        "enc_out": ["batch", "src_len", 512],
+        "enc_mask": ["batch", "src_len"]
       },
       "outputs": {
-        "logits": [
-          "batch",
-          822
-        ],
-        "next_h": [
-          1,
-          "batch",
-          256
-        ]
+        "logits": ["batch", 822],
+        "next_h": [1, "batch", 256]
       }
     }
   }

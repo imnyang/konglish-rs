@@ -10,16 +10,16 @@
 // pnpm ts-node src/pron/script/mergeDictionaries.ts
 // pnpm ts-node src/pron/script/mergeDictionaries.ts --dry-run
 
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { customDictionary as dictionaryA } from "../dictionary";
 import { customDictionary as dictionaryB } from "./customDictionaryPlus";
 
 const isDryRun = process.argv.includes("--dry-run");
 
 function mergeDictionaries(
-  a: Record<string, string[]>,
-  b: Record<string, string[]>,
+  a: Record<string, readonly string[]>,
+  b: Record<string, readonly string[]>,
 ): Record<string, string[]> {
   const merged: Record<string, string[]> = {};
 
