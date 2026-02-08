@@ -18,6 +18,7 @@
     "dist"
   ],
   "scripts": {
+    "build:dict": "node src/pron/script/build_dictionary_ts.mjs",
     "build": "tsup --config tsup.config.ts",
     "clean": "rm -rf dist",
     "lint": "biome check .",
@@ -44,7 +45,8 @@
   "homepage": "https://github.com/oyc0401/konglish#readme",
   "license": "MIT",
   "dependencies": {
-    "cmu-pronouncing-dictionary": "^3.0.0"
+    "cmu-pronouncing-dictionary": "^3.0.0",
+    "onnxruntime-node": "^1.24.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
