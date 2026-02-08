@@ -24,7 +24,7 @@ for (const [k, v] of Object.entries(json ?? {})) {
 }
 
 const out = `/* AUTO-GENERATED. DO NOT EDIT */
-export const DEFAULT_DICTIONARY: Record<string, readonly string[]> =
+export const customDictionary: Record<string, readonly string[]> =
 ${JSON.stringify(dict, null, 2)} as const;
 `;
 

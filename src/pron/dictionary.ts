@@ -1,5 +1,5 @@
 /* AUTO-GENERATED. DO NOT EDIT */
-export const DEFAULT_DICTIONARY: Record<string, readonly string[]> =
+export const customDictionary: Record<string, readonly string[]> =
 {
   "a": [
     "어"
