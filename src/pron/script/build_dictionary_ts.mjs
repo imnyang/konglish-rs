@@ -3,7 +3,7 @@ import path from "node:path";
 
 const ROOT = process.cwd();
 const SRC = path.resolve(ROOT, "src/pron/dictionary.json");
-const OUT = path.resolve(ROOT, "src/pron/dictionary.generated.ts");
+const OUT = path.resolve(ROOT, "src/pron/dictionary.ts");
 
 const normalize = (s) => String(s).trim().toLowerCase();
 
