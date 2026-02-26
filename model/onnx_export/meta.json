@@ -2,41 +2,75 @@
   "hp": {
     "hid": 256,
     "emb": 256,
-    "dropout": 0.1,
+    "dropout": 0.3,
     "teacher_forcing": 0.9,
     "beam": 3,
     "length_alpha": 0.7,
-    "enc_layers": 1,
-    "dec_layers": 1,
+    "enc_layers": 3,
+    "dec_layers": 3,
     "epochs": 30,
     "lr": 0.001,
-    "batch": 256,
+    "batch": 64,
     "clip": 1.0,
-    "max_out": 64
+    "max_out": 30
   },
-  "src_vocab_size": 48,
-  "tgt_vocab_size": 822,
+  "src_vocab_size": 46,
+  "tgt_vocab_size": 950,
   "onnx": {
     "encoder": {
       "inputs": {
-        "src_ids": ["batch", "src_len"]
+        "src_ids": [
+          "batch",
+          "src_len"
+        ]
       },
       "outputs": {
-        "enc_out": ["batch", "src_len", 512],
-        "h0": [1, "batch", 256],
-        "enc_mask": ["batch", "src_len"]
+        "enc_out": [
+          "batch",
+          "src_len",
+          512
+        ],
+        "h0": [
+          3,
+          "batch",
+          256
+        ],
+        "enc_mask": [
+          "batch",
+          "src_len"
+        ]
       }
     },
     "decoder_step": {
       "inputs": {
-        "y_t": ["batch"],
-        "prev_h": [1, "batch", 256],
-        "enc_out": ["batch", "src_len", 512],
-        "enc_mask": ["batch", "src_len"]
+        "y_t": [
+          "batch"
+        ],
+        "prev_h": [
+          3,
+          "batch",
+          256
+        ],
+        "enc_out": [
+          "batch",
+          "src_len",
+          512
+        ],
+        "enc_mask": [
+          "batch",
+          "src_len"
+        ]
       },
       "outputs": {
-        "logits": ["batch", 822],
-        "next_h": [1, "batch", 256]
+        "logits": [
+          "batch",
+          950
+        ],
+        "next_h": [
+          3,
+          "batch",
+          256
+        ]
       }
     }
   }

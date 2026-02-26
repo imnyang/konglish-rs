@@ -68,7 +68,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "에이비씨디씨"
   ],
   "abcdefu": [
-    "에이비씨디이프유"
+    "에이비씨디에프유"
   ],
   "abcdlove": [
     "에이비씨디러브"
@@ -101,7 +101,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "애비제이드 존"
   ],
   "able": [
-    "에이벌"
+    "에이블"
   ],
   "ablihi": [
     "아블리히"
@@ -191,7 +191,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "앱스트랙션"
   ],
   "absurdity": [
-    "업서더티"
+    "업서디티"
   ],
   "abundance": [
     "어번던스"
@@ -245,10 +245,10 @@ export const customDictionary: Record<string, readonly string[]> =
     "액세스"
   ],
   "accessibility": [
-    "액세서빌러티"
+    "액세서빌리티"
   ],
   "accessible": [
-    "액세서벌"
+    "액세서블"
   ],
   "accessory": [
     "액세서리"
@@ -311,7 +311,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "어카운터빌러티"
   ],
   "accountable": [
-    "어카운터벌"
+    "어카운터블"
   ],
   "accountancy": [
     "어카운턴시"
@@ -1133,7 +1133,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "애절"
   ],
   "agility": [
-    "어절러티"
+    "어질러티"
   ],
   "agitation": [
     "애지테이션"
@@ -1172,7 +1172,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "어그리"
   ],
   "agreeable": [
-    "어그리어벌"
+    "어그리어블"
   ],
   "agreeably": [
     "어그리어블리"
@@ -1307,7 +1307,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "에어포트"
   ],
   "airport road addition": [
-    "에어포 트로 드어디션"
+    "에어포트 로드 어디션"
   ],
   "airtight": [
     "에어타이트"
@@ -2246,7 +2246,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "아미노"
   ],
   "amirante": [
-    "아미란테 제도"
+    "아미란테"
   ],
   "amirpour ana lily": [
     "애머푸어 애나 릴리"
@@ -4506,12 +4506,6 @@ export const customDictionary: Record<string, readonly string[]> =
   ],
   "attempt": [
     "어템프트"
-  ],
-  "attenborough sir david frederick": [
-    "서 애튼버러 데이비드 프레더릭"
-  ],
-  "attenborough sir richard samuel": [
-    "서 애튼버러 리처드 새뮤얼"
   ],
   "attend": [
     "어텐드"
@@ -9212,7 +9206,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "보언"
   ],
   "bowen's mill": [
-    "보언 스밀"
+    "보언스 밀"
   ],
   "bower": [
     "바우어"
@@ -13733,7 +13727,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "치즈"
   ],
   "chef": [
-    "쉐프"
+    "셰프"
   ],
   "chelly": [
     "첼리"
@@ -13796,10 +13790,10 @@ export const customDictionary: Record<string, readonly string[]> =
     "체리"
   ],
   "cherry log": [
-    "체리로 그"
+    "체리 로그"
   ],
   "cherry spring": [
-    "체리스 프링"
+    "체리 스프링"
   ],
   "cherry valley": [
     "체리 밸리"
@@ -13859,7 +13853,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "키어렐로 마이클"
   ],
   "chic": [
-    "쉬크"
+    "시크"
   ],
   "chica": [
     "치카"
@@ -20042,7 +20036,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "다크"
   ],
   "darkened": [
-    "다크енд"
+    "다큰드"
   ],
   "darker": [
     "다커"
@@ -20141,7 +20135,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "데이터 짐"
   ],
   "dau": [
-    "디에이유"
+    "다우"
   ],
   "daughter": [
     "도터"
@@ -20153,7 +20147,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "다음"
   ],
   "dauphin island": [
-    "도핀아 일랜드"
+    "도핀 아일랜드"
   ],
   "dave": [
     "데이브"
@@ -20303,7 +20297,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "데이턴"
   ],
   "dayton lakes": [
-    "데이턴레 이크스"
+    "데이턴 레이크스"
   ],
   "dayz": [
     "데이즈"
@@ -20884,7 +20878,7 @@ export const customDictionary: Record<string, readonly string[]> =
   "deming rust": [
     "데밍 러스트"
   ],
-  "deming w edwards": [
+  "deming edwards": [
     "데밍 에드워즈"
   ],
   "demings val": [
@@ -20930,7 +20924,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "뎀프시 마틴"
   ],
   "denali": [
-    "디날리산"
+    "디날리"
   ],
   "dendron": [
     "덴드론"
@@ -23639,7 +23633,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "이스트 리지"
   ],
   "east river": [
-    "리버 이스트강"
+    "이스트 리버"
   ],
   "east side": [
     "이스트 사이드"
@@ -27226,7 +27220,7 @@ export const customDictionary: Record<string, readonly string[]> =
   "foner eric": [
     "포너 에릭"
   ],
-  "foner jack d": [
+  "foner jack": [
     "포너 잭"
   ],
   "font": [
@@ -27497,7 +27491,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "포트 유콘"
   ],
   "forth": [
-    "포스강"
+    "포스"
   ],
   "forthcoming": [
     "포스커밍"
@@ -28444,7 +28438,7 @@ export const customDictionary: Record<string, readonly string[]> =
   "garbage": [
     "가비지"
   ],
-  "garcia charles p": [
+  "garcia charles": [
     "가르시아 찰스"
   ],
   "garcía martínez antonio": [
@@ -28520,7 +28514,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "개릿"
   ],
   "garrett park": [
-    "개릿파 크"
+    "개릿 파크"
   ],
   "garrett scott": [
     "개릿 스콧"
@@ -28811,7 +28805,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "조지"
   ],
   "george abbott": [
-    "애벗"
+    "조지 애벗"
   ],
   "george clooney": [
     "조지 클루니"
@@ -28835,7 +28829,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "조지 워싱턴"
   ],
   "george west": [
-    "조지웨 스트"
+    "조지 웨스트"
   ],
   "georgetown": [
     "조지타운"
@@ -29030,7 +29024,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "기히드라우"
   ],
   "gila": [
-    "힐라강"
+    "힐라"
   ],
   "gilbert elizabeth": [
     "길버트 엘리자베스"
@@ -30938,7 +30932,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "헤일 센터"
   ],
   "haleakala": [
-    "할레아칼라산"
+    "할레아칼라"
   ],
   "half": [
     "하프"
@@ -31370,7 +31364,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "하니스"
   ],
   "harney peak": [
-    "하니산"
+    "하니 피크"
   ],
   "harold varner": [
     "해럴드 바너"
@@ -32747,7 +32741,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "홀리데이 힐스"
   ],
   "holiday lakes": [
-    "홀리데이레 이크스"
+    "홀리데이 레이크스"
   ],
   "holidays": [
     "홀리데이즈"
@@ -32918,10 +32912,10 @@ export const customDictionary: Record<string, readonly string[]> =
     "허니"
   ],
   "honey creek": [
-    "허니크 리크"
+    "허니 크리크"
   ],
   "honey grove": [
-    "허니그 로브"
+    "허니 그로브"
   ],
   "honeybee": [
     "허니비"
@@ -33344,7 +33338,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "허드슨"
   ],
   "hudson oaks": [
-    "허드슨오 크스"
+    "허드슨 오크스"
   ],
   "hudspeth": [
     "허드스퍼스"
@@ -33434,7 +33428,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "휴머노이즈"
   ],
   "humber": [
-    "험버강"
+    "험버"
   ],
   "humberside": [
     "험버사이드"
@@ -35837,7 +35831,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "제임스 피블스"
   ],
   "james river": [
-    "리버 제임스강"
+    "제임스 리버"
   ],
   "james robinson": [
     "제임스 로빈슨"
@@ -36806,7 +36800,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "카"
   ],
   "kaala": [
-    "카알라산"
+    "카알라"
   ],
   "kaanugon": [
     "카아누곤"
@@ -37052,7 +37046,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "칸파이"
   ],
   "kansas": [
-    "캔자스강"
+    "캔자스"
   ],
   "kansas city": [
     "캔자스 시티"
@@ -37547,7 +37541,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "케첩"
   ],
   "kettle": [
-    "케틀강"
+    "케틀"
   ],
   "keuchel dallas": [
     "카이클 댈러스"
@@ -40784,7 +40778,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "론지튜드"
   ],
   "longs peak": [
-    "롱스산"
+    "롱스 피크"
   ],
   "longtown": [
     "롱타운"
@@ -41555,7 +41549,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "매키노"
   ],
   "mackinley": [
-    "매킨리산"
+    "매킨리"
   ],
   "mackinnon roderick": [
     "매키넌 로더릭"
@@ -43343,7 +43337,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "매키언 브라이언"
   ],
   "mckinley": [
-    "매킨리산"
+    "매킨리"
   ],
   "mckinney": [
     "매키니"
@@ -47957,7 +47951,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "노스 플레인필드"
   ],
   "north platte": [
-    "노스 플랫강"
+    "노스 플랫"
   ],
   "north reading": [
     "노스 레딩"
@@ -50996,7 +50990,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "페니 팜스"
   ],
   "pennine": [
-    "페나인산맥"
+    "페나인"
   ],
   "pennington": [
     "페닝턴"
@@ -51617,7 +51611,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "파이크 로저먼드"
   ],
   "pikes peak": [
-    "파이크 스피크"
+    "파이크스 피크"
   ],
   "pikeville": [
     "파이크빌"
@@ -51989,7 +51983,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "플라토닉"
   ],
   "platte": [
-    "플랫강"
+    "플랫"
   ],
   "plattville": [
     "플랫빌"
@@ -52400,7 +52394,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "폰설트 제임스"
   ],
   "pontchartrain": [
-    "폰차트레인 호교"
+    "폰차트레인"
   ],
   "pontiac": [
     "폰티액"
@@ -52490,7 +52484,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "포숀린치 타우"
   ],
   "porcupine": [
-    "포큐파인강"
+    "포큐파인"
   ],
   "porgy": [
     "포기"
@@ -52697,7 +52691,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "포션"
   ],
   "potomac": [
-    "포토맥강"
+    "포토맥"
   ],
   "pots": [
     "팟츠"
@@ -53120,13 +53114,13 @@ export const customDictionary: Record<string, readonly string[]> =
     "프레이"
   ],
   "pribilof": [
-    "프리빌로프 제도"
+    "프리빌로프"
   ],
   "price": [
     "프라이스"
   ],
   "price peak": [
-    "프라이 스산"
+    "프라이스 피크"
   ],
   "price thomas edmunds": [
     "프라이스 토머스 에드먼즈"
@@ -54305,7 +54299,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "레인폴"
   ],
   "rainier": [
-    "레이니어산"
+    "레이니어"
   ],
   "raining": [
     "레이닝"
@@ -54725,7 +54719,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "리애슈어런스"
   ],
   "reassure": [
-    "리 어슈어"
+    "리어슈어"
   ],
   "reawaker": [
     "리어웨이커"
@@ -55835,7 +55829,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "리빌"
   ],
   "reveille range": [
-    "레벌리 산맥"
+    "레벌리 레인지"
   ],
   "revelation": [
     "레벌레이션"
@@ -56261,7 +56255,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "리오 브라보"
   ],
   "rio grande": [
-    "리오 그란데강"
+    "리오 그란데"
   ],
   "rio hondo": [
     "리오 혼도"
@@ -57686,7 +57680,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "세인트 조지"
   ],
   "saint helens": [
-    "세인트 헬렌스산"
+    "세인트 헬렌스"
   ],
   "saint ives": [
     "세인트 아이브스"
@@ -58289,7 +58283,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "사투"
   ],
   "satungang": [
-    "사툰강"
+    "사툰"
   ],
   "saturday": [
     "새터데이"
@@ -60284,7 +60278,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "시에라 블랭카"
   ],
   "sierra nevada": [
-    "시에라네 바다산맥"
+    "시에라 네바다"
   ],
   "siesta": [
     "시에스타"
@@ -61160,7 +61154,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "스네일"
   ],
   "snake": [
-    "스네이크강"
+    "스네이크"
   ],
   "snake creek": [
     "스네이크 크리크"
@@ -61241,7 +61235,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "스노든 에드워드"
   ],
   "snowdon": [
-    "스노든산"
+    "스노든"
   ],
   "snowdon antony armstrong-jones": [
     "스노든 앤터니 암스트롱존스"
@@ -61375,7 +61369,7 @@ export const customDictionary: Record<string, readonly string[]> =
   "solar": [
     "솔러"
   ],
-  "solarz stephen j": [
+  "solarz stephen": [
     "솔러즈 스티븐"
   ],
   "sold": [
@@ -61388,7 +61382,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "솔저즈"
   ],
   "soldiers grove": [
-    "솔저스그 로브"
+    "솔저스 그로브"
   ],
   "sole": [
     "솔"
@@ -64133,7 +64127,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "서프사이드"
   ],
   "surfside beach": [
-    "서프사이 드비치"
+    "서프사이드 비치"
   ],
   "surge": [
     "서지"
@@ -64277,7 +64271,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "서턴 핼"
   ],
   "suwannee": [
-    "스와니강"
+    "스와니"
   ],
   "suzanne scholte": [
     "수잰 숄티"
@@ -64307,7 +64301,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "스웜프"
   ],
   "swan": [
-    "스완강"
+    "스완"
   ],
   "swank hilary ann": [
     "스왱크 힐러리 앤"
@@ -65078,7 +65072,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "틴즈"
   ],
   "tees": [
-    "티스강"
+    "티스"
   ],
   "teeth": [
     "티스"
@@ -65303,7 +65297,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "세일러 리처드"
   ],
   "thames": [
-    "템스강"
+    "템스"
   ],
   "than": [
     "댄"
@@ -65342,19 +65336,19 @@ export const customDictionary: Record<string, readonly string[]> =
     "더 코노트"
   ],
   "the highlands": [
-    "하 일랜드"
+    "더 하일랜즈"
   ],
   "the hills": [
-    "더힐스"
+    "더 힐스"
   ],
   "the plains": [
-    "더플 레인스"
+    "더 플레인스"
   ],
   "the village": [
     "더 빌리지"
   ],
   "the wash": [
-    "워시만"
+    "더 워시"
   ],
   "theater": [
     "시아터"
@@ -65555,7 +65549,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "톰프슨 트레이스"
   ],
   "thompson's station": [
-    "톰프슨스스 테이션"
+    "톰프슨스 스테이션"
   ],
   "thompsons": [
     "톰프슨스"
@@ -66098,13 +66092,13 @@ export const customDictionary: Record<string, readonly string[]> =
     "투데이"
   ],
   "todayyyyy": [
-    "투데이"
+    "투데이이이"
   ],
   "todd brendon": [
     "토드 브렌던"
   ],
   "todd mission": [
-    "토 드미션"
+    "토드 미션"
   ],
   "todo": [
     "투두"
@@ -66479,10 +66473,10 @@ export const customDictionary: Record<string, readonly string[]> =
     "타운"
   ],
   "town of beverly beach": [
-    "타운 오 브베벌리 비치"
+    "타운 오브 베벌리 비치"
   ],
   "town of marineland": [
-    "타운 오 브머린랜드"
+    "타운 오브 머린랜드"
   ],
   "towns": [
     "타운스"
@@ -66560,7 +66554,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "트래디셔널리"
   ],
   "trafalgar": [
-    "트래펄가 광장"
+    "트래펄가"
   ],
   "traffic": [
     "트래픽"
@@ -66680,7 +66674,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "트랩드"
   ],
   "trapper peak": [
-    "트래퍼 산"
+    "트래퍼 피크"
   ],
   "trash": [
     "트래시"
@@ -67253,7 +67247,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "티비"
   ],
   "tweed": [
-    "트위드강"
+    "트위드"
   ],
   "tweet": [
     "트윗"
@@ -67361,7 +67355,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "타인 위어"
   ],
   "tyne river": [
-    "리버 타인강"
+    "타인 리버"
   ],
   "typa": [
     "타이파"
@@ -68161,12 +68155,6 @@ export const customDictionary: Record<string, readonly string[]> =
   "usok": [
     "우속"
   ],
-  "uss lassen": [
-    "래슨호"
-  ],
-  "uss momsen": [
-    "맘슨호"
-  ],
   "usted": [
     "우스테드"
   ],
@@ -68687,7 +68675,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "버로나"
   ],
   "verrazano narrows": [
-    "베라자노내로스 교"
+    "베라자노 내로스"
   ],
   "versace": [
     "베르사체"
@@ -70550,7 +70538,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "화이트 디어"
   ],
   "white hall": [
-    "화이 트홀"
+    "화이트 홀"
   ],
   "white house": [
     "화이트 하우스"
@@ -70574,7 +70562,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "화이트 샌즈"
   ],
   "white settlement": [
-    "화이 트세틀먼트"
+    "화이트 세틀먼트"
   ],
   "white springs": [
     "화이트 스프링스"
@@ -70661,7 +70649,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "휘트머 그레천"
   ],
   "whitney": [
-    "휘트니산"
+    "휘트니"
   ],
   "whitney houston": [
     "휘트니 휴스턴"
@@ -70844,7 +70832,7 @@ export const customDictionary: Record<string, readonly string[]> =
     "윌러시"
   ],
   "willamette": [
-    "윌래밋강"
+    "윌래밋"
   ],
   "willard": [
     "윌러드"
