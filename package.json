@@ -45,8 +45,7 @@
   "homepage": "https://github.com/oyc0401/konglish#readme",
   "license": "MIT",
   "dependencies": {
-    "cmu-pronouncing-dictionary": "^3.0.0",
-    "onnxruntime-node": "^1.24.1"
+    "cmu-pronouncing-dictionary": "^3.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.10",

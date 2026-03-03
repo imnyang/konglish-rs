@@ -1,11 +1,8 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import {
   type LatinToHangulOptions,
   latinToHangul,
   latinToHangulAsync,
 } from "./pron/latinTokorea";
-import { type BeamEngineOptions, OnnxBeamEngine } from "./pron/onnxBeamEngine";
 
 export type KonglishAutoOptions = Omit<LatinToHangulOptions, "infer">;
 
@@ -49,23 +46,14 @@ export class KonglishAuto {
   private constructor(private readonly defaultOptions: LatinToHangulOptions) {}
 
   static async create(options: KonglishAutoOptions): Promise<KonglishAuto> {
-    const engine = new OnnxBeamEngine(getDefaultOnnxOptions());
-    await engine.init();
-    const baseOptions: LatinToHangulOptions = {
-      ...options,
-      infer: (word: string) => engine.predictWord(word),
-    };
-    return new KonglishAuto(baseOptions);
+    return new KonglishAuto(options);
   }
 
   async latinToHangul(
     input: string,
     options?: LatinToHangulOptions,
   ): Promise<string> {
-    return latinToHangulAsync(
-      input,
-      mergeOptions(this.defaultOptions, options),
-    );
+    return latinToHangulAsync(input, mergeOptions(this.defaultOptions, options));
   }
 
   latinToHangulAsync(
@@ -74,20 +62,4 @@ export class KonglishAuto {
   ): Promise<string> {
     return this.latinToHangul(input, options);
   }
-}
-
-function getDefaultOnnxOptions(): BeamEngineOptions {
-  const dir = resolveCurrentDir();
-  return {
-    baseDir: path.resolve(dir, "../model/onnx_export"),
-    beam: 3,
-    maxOut: 64,
-    alpha: 0.7,
-    lowercase: true,
-  };
-}
-
-function resolveCurrentDir(): string {
-  if (typeof __dirname !== "undefined") return __dirname;
-  return path.dirname(fileURLToPath(import.meta.url));
 }

@@ -9,9 +9,6 @@ export type LatinToHangulOptions = {
    * - value: 후보 한글 발음 배열(첫 번째 사용)
    */
   dictionary?: Record<string, string[]>;
-
-  // infer: 추론 함수, 성공 시 토큰, 실패 시 null
-  infer?: (word: string) => Promise<string | null>;
 };
 
 const normalize = (s: string) => s.trim().toLowerCase();
@@ -89,32 +86,5 @@ export async function latinToHangulAsync(
   input: string,
   options?: LatinToHangulOptions,
 ): Promise<string> {
-  const dict = mergeDict(options?.dictionary);
-  const infer = options?.infer;
-
-  const fullHit = fullInputLookup(dict, input);
-  if (fullHit) return fullHit;
-
-  // infer가 없으면 sync와 동일 동작
-  if (!infer) return latinToHangul(input, options);
-
-  const tokens = tokenizePreservingSpecialChars(input);
-
-  let out = "";
-  for (const t of tokens) {
-    if (t.type === "other") {
-      out += t.text;
-      continue;
-    }
-
-    const hit = dictLookup(dict, t.text);
-    if (hit) {
-      out += hit;
-      continue;
-    }
-
-    const pred = await infer(t.text);
-    out += pred ?? t.text;
-  }
-  return out;
+  return latinToHangul(input, options);
 }
