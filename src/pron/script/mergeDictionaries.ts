@@ -12,10 +12,39 @@
 
 import * as fs from "node:fs";
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import { customDictionary as dictionaryA } from "../dictionary";
 import { customDictionary as dictionaryB } from "./customDictionaryPlus";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const isDryRun = process.argv.includes("--dry-run");
+
+function hasOwn(
+  obj: Record<string, readonly string[]>,
+  key: string,
+): boolean {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+function getValues(
+  obj: Record<string, readonly string[]>,
+  key: string,
+): readonly string[] {
+  return hasOwn(obj, key) ? obj[key]! : [];
+}
+
+function unique(values: readonly string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const value of values) {
+    if (!seen.has(value)) {
+      seen.add(value);
+      result.push(value);
+    }
+  }
+  return result;
+}
 
 function mergeDictionaries(
   a: Record<string, readonly string[]>,
@@ -28,17 +57,14 @@ function mergeDictionaries(
 
   // 키별로 병합
   for (const key of allKeys) {
-    const valuesA = a[key] ?? [];
-    const valuesB = b[key] ?? [];
-
-    // 배열 합치고 중복 제거 (순서 유지)
-    const combined: string[] = [];
-    for (const v of [...valuesA, ...valuesB]) {
-      if (!combined.includes(v)) {
-        combined.push(v);
-      }
+    if (hasOwn(b, key)) {
+      merged[key] = unique(getValues(b, key));
+      continue;
     }
-    merged[key] = combined;
+
+    if (hasOwn(a, key)) {
+      merged[key] = unique(getValues(a, key));
+    }
   }
 
   // 키 이름 오름차순 정렬
@@ -56,8 +82,9 @@ function generateFileContent(dict: Record<string, string[]>): string {
   lines.push("export const customDictionary: Record<string, string[]> = {");
 
   for (const [key, values] of Object.entries(dict)) {
-    const valuesStr = values.map((v) => `"${v}"`).join(", ");
-    lines.push(`  ${key}: [${valuesStr}],`);
+    const keyLiteral = JSON.stringify(key);
+    const valuesStr = values.map((v) => JSON.stringify(v)).join(", ");
+    lines.push(`  ${keyLiteral}: [${valuesStr}],`);
   }
 
   lines.push("};");
@@ -81,8 +108,8 @@ async function main() {
   console.log(`📖 중복 키: ${keysA + keysB - keysMerged}개\n`);
 
   // 중복 키 목록 출력
-  const duplicateKeys = Object.keys(dictionaryA).filter(
-    (key) => key in dictionaryB,
+  const duplicateKeys = Object.keys(dictionaryA).filter((key) =>
+    hasOwn(dictionaryB, key),
   );
   if (duplicateKeys.length > 0) {
     console.log("🔄 중복 키 목록:");
