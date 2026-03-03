@@ -7,15 +7,10 @@ describe("Konglish smoke", () => {
       dictionary: { latte: ["라떼"], meetup: ["밋업"] },
     });
 
-    const autoKonglish = await Konglish.auto({
-      dictionary: { latte: ["라떼"], meetup: ["밋업"] },
-    });
-
     const syncOut = konglish.latinToHangul("latte meetup xylophone");
-    const asyncOut = await autoKonglish.latinToHangul("latte meetup xylophone");
+    const asyncOut = await konglish.latinToHangulAsync("latte meetup xylophone");
 
-    console.log(asyncOut);
+    expect(syncOut).toBe(asyncOut);
     expect(syncOut.startsWith("라떼 밋업 xylophone")).toBe(true);
-    expect(asyncOut.startsWith("라떼 밋업")).toBe(true);
   }, 20_000);
 });

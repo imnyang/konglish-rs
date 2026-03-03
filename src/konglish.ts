@@ -4,8 +4,6 @@ import {
   latinToHangulAsync,
 } from "./pron/latinTokorea";
 
-export type KonglishAutoOptions = Omit<LatinToHangulOptions, "infer">;
-
 function mergeOptions(
   base?: LatinToHangulOptions,
   override?: LatinToHangulOptions,
@@ -23,10 +21,6 @@ function mergeOptions(
 export class Konglish {
   constructor(private readonly defaultOptions: LatinToHangulOptions = {}) {}
 
-  static auto(options: KonglishAutoOptions): Promise<KonglishAuto> {
-    return KonglishAuto.create(options);
-  }
-
   latinToHangul(input: string, options?: LatinToHangulOptions): string {
     return latinToHangul(input, mergeOptions(this.defaultOptions, options));
   }
@@ -39,27 +33,5 @@ export class Konglish {
       input,
       mergeOptions(this.defaultOptions, options),
     );
-  }
-}
-
-export class KonglishAuto {
-  private constructor(private readonly defaultOptions: LatinToHangulOptions) {}
-
-  static async create(options: KonglishAutoOptions): Promise<KonglishAuto> {
-    return new KonglishAuto(options);
-  }
-
-  async latinToHangul(
-    input: string,
-    options?: LatinToHangulOptions,
-  ): Promise<string> {
-    return latinToHangulAsync(input, mergeOptions(this.defaultOptions, options));
-  }
-
-  latinToHangulAsync(
-    input: string,
-    options?: LatinToHangulOptions,
-  ): Promise<string> {
-    return this.latinToHangul(input, options);
   }
 }
