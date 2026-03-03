@@ -18,7 +18,6 @@
     "dist"
   ],
   "scripts": {
-    "build:dict": "node src/pron/script/build_dictionary_ts.mjs",
     "build": "tsup --config tsup.config.ts",
     "clean": "rm -rf dist",
     "lint": "biome check .",
