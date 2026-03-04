@@ -1,7 +1,6 @@
 import {
   type LatinToHangulOptions,
   latinToHangul,
-  latinToHangulAsync,
 } from "./pron/latinTokorea";
 
 function mergeOptions(
@@ -25,13 +24,4 @@ export class Konglish {
     return latinToHangul(input, mergeOptions(this.defaultOptions, options));
   }
 
-  latinToHangulAsync(
-    input: string,
-    options?: LatinToHangulOptions,
-  ): Promise<string> {
-    return latinToHangulAsync(
-      input,
-      mergeOptions(this.defaultOptions, options),
-    );
-  }
 }
