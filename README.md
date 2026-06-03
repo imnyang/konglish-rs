@@ -1,57 +1,41 @@
-# Konglish - 영어 한국어 발음 변환기
+# Konglish
 
-영어/외래어 문장을 한국어 발음 표기로 바꿔주는 TypeScript 라이브러리입니다.    
-영어는 발음매칭이 어렵기 때문에, 커스텀 사전을 사용해서 매칭했습니다.
-사전에 없는 단어라면 그대로 유지되니 필요한 항목을 사전에 채워 넣어 주세요.
-
-## 설치
-
-```bash
-pnpm add konglish
-# 또는
-npm install konglish
-yarn add konglish
-```
+영어/외래어 문장을 한국어 발음 표기로 바꿔주는 Rust 라이브러리입니다.
+~~간단하게 쓸 곳이 있어서 Codex로 작성되었습니다.~~
 
 ## 사용법
 
-### 간편 호출
+```rust
+use konglish::latin_to_hangul_default;
 
-```ts
-import { latinToHangul } from "konglish";
-
-latinToHangul("good morning"); // "굿 모닝"
-latinToHangul("coffee time"); // "커피 타임"
-latinToHangul("family vacation"); // "패밀리 베케이션"
-latinToHangul("weekend movie night"); // "위켄드 무비 나이트"
-latinToHangul("happy birthday"); // "해피 버스데이"
-latinToHangul("pizza party"); // "피자 파티"
-latinToHangul("music festival"); // "뮤직 페스티벌"
-latinToHangul("new project"); // "뉴 프로젝트"
-latinToHangul("thank you"); // "땡큐"
-latinToHangul("see you soon!"); // "씨 유 순!"
+let out = latin_to_hangul_default("pretender");
+assert_eq!(out, "프리텐더");
 ```
 
-### 클래스 호출
+커스텀 사전:
 
-```ts
-import { Konglish } from "konglish";
+```rust
+use konglish::{latin_to_hangul, Dictionary, LatinToHangulOptions};
 
-const konglish = new Konglish({
-  dictionary: {
-    latte: ["라떼"],
-    meetup: ["밋업"],
-  },
-});
+let mut dictionary = Dictionary::new();
+dictionary.insert("latte".to_string(), vec!["라떼".to_string()]);
 
-const sync = konglish.latinToHangul("latte meetup"); // "라떼 밋업"
-const asyncOut = await konglish.latinToHangulAsync(
-  "latte meetup xylophone",
-); // "라떼 밋업 xylophone"
+let options = LatinToHangulOptions {
+    dictionary,
+    ..Default::default()
+};
+
+assert_eq!(latin_to_hangul("latte", Some(&options)), "라떼");
 ```
 
-`latinToHangulAsync`는 Promise를 반환하므로 비동기 코드에서 `await`로 호출할 수 있습니다.
+내장 사전은 `src/dictionary.rs`의 `CUSTOM_DICTIONARY`에 추가합니다.
 
+```rust
+dictionary! {
+    "a": ["어"],
+    "aaron hank": ["에런 행크"],
+}
+```
 
 ## 라이선스
 

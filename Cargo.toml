@@ -1,0 +1,13 @@
+[package]
+name = "konglish"
+version = "0.3.0"
+edition = "2021"
+license = "MIT"
+description = "English to Korean pronunciation transliteration"
+repository = "https://github.com/oyc0401/konglish"
+
+[lib]
+name = "konglish"
+path = "src/lib.rs"
+
+[dependencies]
