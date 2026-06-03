@@ -5,10 +5,17 @@ pub type Dictionary = HashMap<String, Vec<String>>;
 
 macro_rules! dictionary {
     ($($key:literal: [$($value:literal),* $(,)?]),* $(,)?) => {{
-        let mut dict = Dictionary::new();
-        $(
-            dict.insert($key.to_string(), vec![$($value.to_string()),*]);
-        )*
+        const ENTRIES: &[(&str, &[&str])] = &[
+            $(($key, &[$($value),*])),*
+        ];
+
+        let mut dict = Dictionary::with_capacity(ENTRIES.len());
+        for (key, values) in ENTRIES {
+            dict.insert(
+                (*key).to_string(),
+                values.iter().map(|value| (*value).to_string()).collect(),
+            );
+        }
         dict
     }};
 }
