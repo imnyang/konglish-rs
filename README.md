@@ -1,6 +1,9 @@
+# https://github.com/oyc0401/konglish
+
 # Konglish
 
 영어/외래어 문장을 한국어 발음 표기로 바꿔주는 Rust 라이브러리입니다.
+
 ~~간단하게 쓸 곳이 있어서 Codex로 작성되었습니다.~~
 
 ## 사용법
